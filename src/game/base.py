@@ -9,11 +9,13 @@ class Game(object):
     locations = {}
     current_location = None
     player = None
+    active_game = None
 
     def initialize(self):
         ''' Declare the player and any locations or items
         '''
         self.player = Player()
+        self.active_game = True
 
     def begin(self):
         ''' Starts the game and a potentially endless
@@ -21,6 +23,14 @@ class Game(object):
         '''
         self.look()
         self.new_turn()
+
+    @classmethod
+    def gameover(cls, win=False):
+        if win:
+            print 'You win!'
+        else:
+            print 'Game over'
+        return
 
     def new_turn(self):
         ''' Take an input command from user and try
@@ -62,8 +72,8 @@ class Game(object):
         elif command.split()[0].lower() == 'inventory':
             self.inventory()
 
-        # Handle default case (unknown action)
         else:
+            # Handle default case (unknown action)
             print 'You can\'t perform that action now. Your possible actions are {actions}'.format(
                 actions = ', '.join(
                     ['look <item>', 'pickup <item>', 'drop <item>', 'inventory']
