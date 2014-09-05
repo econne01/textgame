@@ -11,7 +11,7 @@ class Location(object):
     name = ''
     description = ''
 
-    def __init__(self, name, description, items, exits, **kwargs):
+    def __init__(self, name, description, items=[], exits={}, **kwargs):
         self.name = name
         self.description = description
         self.items = items
